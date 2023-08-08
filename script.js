@@ -1,0 +1,1 @@
+ReactDOM.render(React.createElement(Stopwatch, null), document.getElementById('root'));
