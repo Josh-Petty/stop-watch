@@ -1,1 +1,1 @@
-ReactDOM.render(React.createElement(Stopwatch, null), document.getElementById('root'));
+ReactDOM.render(React.createElement(StopWatch, null), document.getElementById('root'));

@@ -1,9 +1,43 @@
-class Stopwatch extends React.Component {
+class StopWatch extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       timePassedInMilliseconds: 0
     }
+
+    this.timer = null;
+
+    this.start = this.start.bind(this);
+    this.stop = this.stop.bind(this);
+    this.reset = this.reset.bind(this);
+  }
+
+  start() {
+    if (!this.timer) {
+      let startTime = Date.now();
+      this.timer = setInterval(() => {
+        const stopTime = Date.now();
+        const timePassedInMilliseconds = stopTime - startTime + this.state.timePassedInMilliseconds;
+
+        this.setState({
+          timePassedInMilliseconds,
+        });
+
+        startTime = stopTime;
+      }, 250); // Execute every 250 milliseconds
+    }
+  }
+
+  stop() {
+    window.clearInterval(this.timer);
+    this.timer = null;
+  }
+
+  reset() {
+    this.stop();
+    this.setState({
+      timePassedInMilliseconds: 0
+    })
   }
 
   render() {
@@ -13,13 +47,13 @@ class Stopwatch extends React.Component {
           {Math.floor(this.state.timePassedInMilliseconds / 1000)} s
         </h2>
         <div className="d-flex justify-content-center">
-          <button className="btn btn-outline-primary mr-2">
+          <button className="btn btn-outline-primary mr-2" onClick={this.start}>
             start
           </button>
-          <button className="btn btn-outline-danger mr-2">
+          <button className="btn btn-outline-danger mr-2" onClick={this.stop}>
             stop
           </button>
-          <button className="btn btn-outline-warning">
+          <button className="btn btn-outline-warning" onClick={this.reset}>
             reset
           </button>
         </div>

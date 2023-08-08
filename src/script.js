@@ -1,4 +1,4 @@
 ReactDOM.render(
-  <Stopwatch />,
+  <StopWatch />,
   document.getElementById('root')
 );
